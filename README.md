@@ -20,7 +20,7 @@ const clientId = '3MVG9A2kN3Bn17hvVNDOE5FX8c9hS...30dgSSfyGi1FS09Zg'; // This is
 const privateKey = require('fs').readFileSync('./privateKey.key', 'utf8');
 // pass in options
 const options = {
-  uri: 'https://test.salesforce.com/services/oauth2/token', // OAuth URL
+  isTest: true, // is this a test instance?
   clientId: clientId, // SFDC `ConsumerKey` of Connected App
   privateKey: privateKey, // private key file as string
   user: 'user@toImpersonate.com' // UserName of API user
@@ -28,7 +28,7 @@ const options = {
 
 nsj.getToken(options, function(err, response) {
 	// err
-	// response.accessToken will contain the token to use on SalesForce API.
+	// response.access_token will contain the token to use on SalesForce API.
 });
 
 ```
@@ -47,12 +47,13 @@ nsj.getToken(options, function(err, response) {
 	const sfConnection = new jsforce.Connection();
 
   sfConnection.initialize({
-    instanceUrl: response.instanceUrl,
-    accessToken: response.accessToken
+    instanceUrl: response.instance_url,
+    accessToken: response.access_token
   });
 
-  sfConnection.query('Select Name from Account', function(err, results) {
+  sfConnection.query('SELECT Id, Name FROM Account', function(err, results) {
     console.log(results);
+    console.log(`First record : ${result.records[0].Name} - ${result.records[0].Id}`);
   });
 
 });
