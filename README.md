@@ -20,7 +20,7 @@ const clientId = '3MVG9A2kN3Bn17hvVNDOE5FX8c9hS...30dgSSfyGi1FS09Zg'; // This is
 const privateKey = require('fs').readFileSync('./privateKey.key', 'utf8');
 // pass in options
 const options = {
-  uri: 'https://test.salesforce.com/services/oauth2/token' // OAuth URL
+  uri: 'https://test.salesforce.com/services/oauth2/token', // OAuth URL
   clientId: clientId, // SFDC `ConsumerKey` of Connected App
   privateKey: privateKey, // private key file as string
   user: 'user@toImpersonate.com' // UserName of API user
