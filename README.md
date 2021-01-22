@@ -27,8 +27,8 @@ const options = {
 }
 
 nsj.getToken(options, function(err, response) {
-	// err
-	// response.access_token will contain the token to use on SalesForce API.
+  // err
+  // response.access_token will contain the token to use on SalesForce API.
 });
 
 ```
@@ -37,14 +37,16 @@ This is an example on how to use it with [jsforce](https://github.com/jsforce/js
 
 ```javascript
 const jsforce = require('jsforce');
-const nsj = require('salesforce-jwt');
+const nsj = require('node-salesforce-jwt');
 
 const options = ...
 
 nsj.getToken(options, function(err, response) {
-	// err
-
-	const sfConnection = new jsforce.Connection();
+  if (err) {
+    console.log(err);
+    return;
+  }
+  const sfConnection = new jsforce.Connection();
 
   sfConnection.initialize({
     instanceUrl: response.instance_url,
